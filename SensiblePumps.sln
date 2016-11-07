@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensiblePumps", "SensiblePumps\SensiblePumps.csproj", "{AC10E84A-9FC9-4CE1-9201-6AB90FFE541E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15ACCFA8-49B1-41F3-9F9F-DC626E1EF8C3}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-		LICENSE.md = LICENSE.md
+		buildRelease.bat = buildRelease.bat
+		deploy.bat = deploy.bat
 		install-sensible-pumps.cfg = install-sensible-pumps.cfg
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+		SensiblePumpsCont.version = SensiblePumpsCont.version
 	EndProjectSection
 EndProject
 Global
@@ -21,7 +26,8 @@ Global
 		{AC10E84A-9FC9-4CE1-9201-6AB90FFE541E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC10E84A-9FC9-4CE1-9201-6AB90FFE541E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = SensiblePumps\SensiblePumps.csproj
