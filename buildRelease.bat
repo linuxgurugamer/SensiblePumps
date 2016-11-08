@@ -36,6 +36,7 @@ rmdir /s /q %HOMEDIR%\install\Gamedata\SensiblePumpsCont
 
 copy SensiblePumps\bin\Release\SensiblePumpsCont.dll GameData\SensiblePumpsCont\Plugins
 copy  SensiblePumpsCont.version GameData\SensiblePumpsCont\SensiblePumpsCont.version
+copy  install-sensible-pumps.cfg GameData\SensiblePumpsCont\
 copy /Y README.md GameData\SensiblePumpsCont
 
 xcopy /Y /E GameData\SensiblePumpsCont  %HOMEDIR%\install\Gamedata\SensiblePumpsCont\
@@ -47,4 +48,4 @@ cd %HOMEDIR%\install
 
 set FILE="%RELEASEDIR%\SensiblePumpsCont-%VERSION%.zip"
 IF EXIST %FILE% del /F %FILE%
-%ZIP% a -tzip %FILE% GameData\SensiblePumpsCont 
+%ZIP% a -tzip %FILE% GameData\SensiblePumpsCont GameData\ModuleManager*.*
