@@ -1,0 +1,5 @@
+1.2.1
+	Initial adoption by LGG
+
+1.2.2
+	Updated for 1.3

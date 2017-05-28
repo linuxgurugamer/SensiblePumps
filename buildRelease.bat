@@ -1,51 +1,37 @@
-﻿@echo off
-set DEFHOMEDRIVE=d:
-set DEFHOMEDIR=%DEFHOMEDRIVE%%HOMEPATH%
-set HOMEDIR=
-set HOMEDRIVE=%CD:~0,2%
+﻿rem
+@echo off
+
 
 set RELEASEDIR=d:\Users\jbb\release
 set ZIP="c:\Program Files\7-zip\7z.exe"
-echo Default homedir: %DEFHOMEDIR%
 
-rem set /p HOMEDIR= "Enter Home directory, or <CR> for default: "
 
-if "%HOMEDIR%" == "" (
-set HOMEDIR=%DEFHOMEDIR%
-)
-echo %HOMEDIR%
+set VERSIONFILE=SensiblePumpsCont.version
+rem The following requires the JQ program, available here: https://stedolan.github.io/jq/download/
+c:\local\jq-win64  ".VERSION.MAJOR" %VERSIONFILE% >tmpfile
+set /P major=<tmpfile
 
-SET _test=%HOMEDIR:~1,1%
-if "%_test%" == ":" (
-set HOMEDRIVE=%HOMEDIR:~0,2%
-)
+c:\local\jq-win64  ".VERSION.MINOR"  %VERSIONFILE% >tmpfile
+set /P minor=<tmpfile
 
-type SensiblePumpsCont.version
-set /p VERSION= "Enter version: "
+c:\local\jq-win64  ".VERSION.PATCH"  %VERSIONFILE% >tmpfile
+set /P patch=<tmpfile
 
-set d=%HOMEDIR\install
-if exist %d% goto one
-mkdir %d%
-:one
-set d=%HOMEDIR%\install\Gamedata
-if exist %d% goto two
-mkdir %d%
-:two
+c:\local\jq-win64  ".VERSION.BUILD"  %VERSIONFILE% >tmpfile
+set /P build=<tmpfile
+del tmpfile
+set VERSION=%major%.%minor%.%patch%
+if "%build%" NEQ "0"  set VERSION=%VERSION%.%build%
 
-rmdir /s /q %HOMEDIR%\install\Gamedata\SensiblePumpsCont
-
-copy SensiblePumps\bin\Release\SensiblePumpsCont.dll GameData\SensiblePumpsCont\Plugins
+copy SensiblePumps\bin\Release\SensiblePumps.dll GameData\SensiblePumpsCont\Plugins
 copy  SensiblePumpsCont.version GameData\SensiblePumpsCont\SensiblePumpsCont.version
 copy  install-sensible-pumps.cfg GameData\SensiblePumpsCont\
 copy /Y README.md GameData\SensiblePumpsCont
 
-xcopy /Y /E GameData\SensiblePumpsCont  %HOMEDIR%\install\Gamedata\SensiblePumpsCont\
-copy /y LICENSE.md %HOMEDIR%\install\Gamedata\SensiblePumpsCont
-copy /y ..\MiniAVC.dll %HOMEDIR%\install\GameData\SensiblePumpsCont
-
-%HOMEDRIVE%
-cd %HOMEDIR%\install
+copy /y LICENSE.md Gamedata\SensiblePumpsCont
+copy /y ..\MiniAVC.dll GameData\SensiblePumpsCont
 
 set FILE="%RELEASEDIR%\SensiblePumpsCont-%VERSION%.zip"
 IF EXIST %FILE% del /F %FILE%
 %ZIP% a -tzip %FILE% GameData\SensiblePumpsCont GameData\ModuleManager*.*
+pause

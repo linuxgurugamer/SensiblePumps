@@ -8,7 +8,7 @@ rem copy /Y "D:\Users\jbb\github\KerbalObjectInspector\KerbalObjectInspector\REA
 rem copy /Y "$(TargetDir)$(TargetFileName)" "D:\Users\jbb\github\KerbalObjectInspector\KerbalObjectInspector\Plugins\$(TargetFileName)"
 
 
-set H=R:\KSP_1.1.4_dev
+set H=R:\KSP_1.3.0_dev
 echo %H%
 
 copy SensiblePumps\bin\Debug\SensiblePumps.dll D:\Users\jbb\github\SensiblePumps\GameData\SensiblePumpsCont\Plugins
