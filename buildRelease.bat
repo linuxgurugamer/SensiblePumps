@@ -34,4 +34,3 @@ copy /y ..\MiniAVC.dll GameData\SensiblePumpsCont
 set FILE="%RELEASEDIR%\SensiblePumpsCont-%VERSION%.zip"
 IF EXIST %FILE% del /F %FILE%
 %ZIP% a -tzip %FILE% GameData\SensiblePumpsCont GameData\ModuleManager*.*
-pause
