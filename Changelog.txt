@@ -10,3 +10,6 @@
 1.2.4
 	Fixed MM script to add this to engines with ModuleEngines FX
 	Added code to exclude solid rocket motors
+
+1.2.4.1
+	Removed setting when SRB is detected

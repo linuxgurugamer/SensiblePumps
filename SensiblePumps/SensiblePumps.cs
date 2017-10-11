@@ -35,6 +35,10 @@ namespace SensiblePumps
                             isSRB = true;
                 }
             }
+            if (isSRB)
+            {
+                Fields["isSensible"].guiActiveEditor = false;
+            }
         }
 
         // Ok, I can't figure out if there is a callback I can use or not, screw it, it will work anyway.
