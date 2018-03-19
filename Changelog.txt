@@ -13,3 +13,7 @@
 
 1.2.4.1
 	Removed setting when SRB is detected
+
+1.2.5
+	Updated case for the On/Off display 
+	Updated for KSP 1.4.1

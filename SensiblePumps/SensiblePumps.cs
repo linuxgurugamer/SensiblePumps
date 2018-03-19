@@ -4,7 +4,7 @@ namespace SensiblePumps
     public class SensiblePumps : PartModule
     {
 
-        [UI_Toggle(disabledText = "off", enabledText = "on")]
+        [UI_Toggle(disabledText = "Off", enabledText = "On")]
         [KSPField(guiActiveEditor = true, guiName = "Sensible Pumps ", isPersistant = true)]
         public bool isSensible = true;
 
