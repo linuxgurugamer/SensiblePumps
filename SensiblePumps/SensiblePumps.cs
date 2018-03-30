@@ -1,4 +1,7 @@
-﻿
+﻿using System;
+using KSP;
+using UnityEngine;
+
 namespace SensiblePumps
 {
     public class SensiblePumps : PartModule
@@ -12,12 +15,14 @@ namespace SensiblePumps
 
         bool isSRB = false;
 
-        public override void OnStart(StartState state)
+        public void Start()
         {
-            if (state != StartState.Editor)
+
+            if (HighLogic.LoadedScene != GameScenes.EDITOR)
             {
                 numberOfParts = vessel.parts.Count;
             }
+
             foreach (PartModule thatModule in part.Modules)
             {
                 var thatEngine = thatModule as ModuleEngines;
@@ -39,39 +44,47 @@ namespace SensiblePumps
             {
                 Fields["isSensible"].guiActiveEditor = false;
             }
+            GameEvents.onPartDeCoupleComplete.Add(onPartDecoupleComplete);
+        }
+        void Destroy()
+        {
+            GameEvents.onPartDeCoupleComplete.Remove(onPartDecoupleComplete);
         }
 
-        // Ok, I can't figure out if there is a callback I can use or not, screw it, it will work anyway.
-        public override void OnFixedUpdate()
+        bool destroyThis = false;
+
+        void onPartDecoupleComplete(Part p)
         {
-            if (isSensible)
+
+            if (!vessel.isCommandable && !isSRB && !destroyThis)
             {
-                if (numberOfParts != vessel.parts.Count)
+                   
+                foreach (PartModule thatModule in part.Modules)
                 {
-                    numberOfParts = vessel.parts.Count;
-                    // Number of parts changed, so, let's go to work.
-                    // If we're part of a debris object, shutdown all engines.
-                    if (!vessel.isCommandable && !isSRB)
+                    var thatEngine = thatModule as ModuleEngines;
+                    var thatEngineFX = thatModule as ModuleEnginesFX;
+
+                    if (thatEngine != null)
                     {
-                        foreach (PartModule thatModule in part.Modules)
-                        {
-                            var thatEngine = thatModule as ModuleEngines;
-                            var thatEngineFX = thatModule as ModuleEnginesFX;
-
-                            if (thatEngine != null)
-                                thatEngine.Shutdown();
-                       
-                            if (thatEngineFX != null)
-                                thatEngineFX.Shutdown();
-
-                        }
+                        thatEngine.Shutdown();
+                        destroyThis = true;
                     }
-                    // And selfdestruct the partmodule for good measure, we have no further work to do.
+
+                    if (thatEngineFX != null)
+                    {
+                        thatEngineFX.Shutdown();
+                        destroyThis = true;
+                    }
+                }
+
+                // And selfdestruct the partmodule for good measure, we have no further work to do.
+                if (destroyThis)
+                {
+                    this.Destroy();
                     Destroy(this);
                 }
             }
         }
-
     }
 }
 

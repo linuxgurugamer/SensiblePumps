@@ -18,3 +18,8 @@
 	Updated case for the On/Off display 
 	Updated for KSP 1.4.1
 	Added Jenkins config
+
+1.2.6
+	Fixed non-working in 1.4.1
+	Major Improvement - Optimized code by using onPartDeCoupleComplete instead of an OnFixedUpdate
+	Updated version to allow all 1.4.1-1.4.99 versions
