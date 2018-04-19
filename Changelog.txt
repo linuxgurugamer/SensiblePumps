@@ -23,3 +23,6 @@
 	Fixed non-working in 1.4.1
 	Major Improvement - Optimized code by using onPartDeCoupleComplete instead of an OnFixedUpdate
 	Updated version to allow all 1.4.1-1.4.99 versions
+
+1.2.6.1
+	Fixed nullref which occurred after decoupling a vessel

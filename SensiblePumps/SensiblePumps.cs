@@ -56,7 +56,7 @@ namespace SensiblePumps
         void onPartDecoupleComplete(Part p)
         {
 
-            if (!vessel.isCommandable && !isSRB && !destroyThis)
+            if (vessel != null && !vessel.isCommandable && !isSRB && !destroyThis)
             {
                    
                 foreach (PartModule thatModule in part.Modules)
