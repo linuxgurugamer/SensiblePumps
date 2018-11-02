@@ -26,3 +26,6 @@
 
 1.2.6.1
 	Fixed nullref which occurred after decoupling a vessel
+
+1.2.6.2
+	Version bump for 1.5 rebuild
