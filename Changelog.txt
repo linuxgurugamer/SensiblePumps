@@ -29,3 +29,7 @@
 
 1.2.6.2
 	Version bump for 1.5 rebuild
+
+1.2.7
+	Version bump for 1.7.2
+	Updated AssemblyVersion.tt
